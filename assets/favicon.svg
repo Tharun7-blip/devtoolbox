@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#8b5cf6" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="#0f172a"/>
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#glow-grad)"/>
+  <rect x="4" y="4" width="56" height="56" rx="16" stroke="url(#primary-grad)" stroke-width="2" stroke-opacity="0.8"/>
+  <g filter="url(#shadow)">
+    <!-- Toolbox body -->
+    <path d="M16 26C16 23.7909 17.7909 22 20 22H44C46.2091 22 48 23.7909 48 26V44C48 46.2091 46.2091 48 44 48H20C17.7909 48 16 46.2091 16 44V26Z" fill="url(#primary-grad)"/>
+    <!-- Handle -->
+    <path d="M26 22V18C26 16.8954 26.8954 16 28 16H36C37.1046 16 38 16.8954 38 18V22" stroke="url(#primary-grad)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Inner code glyph < / > -->
+    <path d="M25 32L21 35L25 38" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M39 32L43 35L39 38" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M34 30L30 40" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevToolbox – Complete Developer Utility Toolkit</title>
+  <meta name="description" content="A modern, high-performance web utility suite for developers: JSON tools, Base64 & URL encoders, text converters, password generator, color converter and more.">
+  <meta name="theme-color" content="#0a0d14">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="DevToolbox – Complete Developer Utility Toolkit">
+  <meta property="og:description" content="All-in-one developer utilities: 10 fully functional tools running 100% locally in your browser.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- App Sidebar -->
+    <aside id="app-sidebar" class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#dashboard" class="logo-brand">
+          <img src="./assets/favicon.svg" alt="DevToolbox Logo" class="logo-icon-svg">
+          <span class="brand-gradient">DevToolbox</span>
+          <span class="badge-version">v1.0</span>
+        </a>
+        <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Quick Search in Sidebar -->
+      <div class="sidebar-search-box">
+        <div class="search-input-wrapper">
+          <svg class="icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" class="tool-search-input" placeholder="Search tools..." aria-label="Search tools">
+          <span class="kbd-shortcut">Ctrl+K</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links Container -->
+      <nav id="sidebar-nav" class="sidebar-nav" aria-label="Main Navigation">
+        <!-- Dynamically rendered by app.js with category groupings -->
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="icon nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <span class="theme-label">Light Mode</span>
+        </button>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sidebar-github-link" title="GitHub Repository">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- Top Sticky App Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="hamburger-btn" class="hamburger-btn" aria-label="Open menu" type="button">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="#dashboard" class="breadcrumb-root">Home</a>
+            <span class="breadcrumb-sep">/</span>
+            <span id="topbar-tool-title" class="breadcrumb-current">Dashboard</span>
+          </nav>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Favorite toggle for current active tool view -->
+          <button id="tool-header-fav-btn" type="button" class="btn btn-sm btn-outline hidden">
+            <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            Add to Favourites
+          </button>
+
+          <!-- Topbar Theme Toggle Button -->
+          <button type="button" class="btn btn-sm btn-outline theme-toggle-btn" aria-label="Toggle theme">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <span class="theme-label">Theme</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- App Body Container -->
+      <div class="content-body">
+
+        <!-- ================================================================== -->
+        <!-- VIEW 1: DASHBOARD -->
+        <!-- ================================================================== -->
+        <section id="view-dashboard" class="view-section active">
+          <!-- Welcome Hero Banner -->
+          <div class="hero-banner">
+            <div class="hero-content">
+              <div class="hero-badge">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.286L13 21l-2.286-6.857L5 12l5.714-2.286L13 3z"/></svg>
+                <span>Fast, Local &amp; Private Developer Utilities</span>
+              </div>
+              <h1 class="hero-title">Your Complete <span class="brand-gradient">Developer Toolkit</span></h1>
+              <p class="hero-subtitle">
+                Streamline daily engineering tasks with 10 zero-latency client-side tools. Format JSON, encode Base64 &amp; URLs, transform text cases, generate crypto-grade passwords, and convert color codes directly in your browser.
+              </p>
+
+              <!-- Central Hero Search -->
+              <div class="hero-search-wrapper">
+                <div class="hero-search-box">
+                  <svg class="icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <input type="text" class="tool-search-input" placeholder="Type to search tools by name, tag, or function... (e.g. JSON, Base64, Password)" aria-label="Search tools">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats Bar -->
+          <div class="quick-stats-grid">
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrap">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              </div>
+              <div class="stat-info">
+                <div id="stat-total-tools" class="stat-value">10</div>
+                <div class="stat-label">Available Tools</div>
+              </div>
+            </div>
+
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrap" style="color: #fbbf24;">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <div class="stat-info">
+                <div id="stat-favorite-tools" class="stat-value">0</div>
+                <div class="stat-label">Pinned Favourites</div>
+              </div>
+            </div>
+
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrap" style="color: #38bdf8;">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="stat-info">
+                <div id="stat-recent-tools" class="stat-value">0</div>
+                <div class="stat-label">Recent Usages</div>
+              </div>
+            </div>
+
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrap" style="color: #a855f7;">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Tool Categories</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Favourite Tools -->
+          <div class="section-favorites-wrapper">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <svg class="icon" style="color: #fbbf24;" viewBox="0 0 24 24" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <h2 class="section-title">Favourite Tools</h2>
+              </div>
+            </div>
+
+            <!-- Favorites Grid Container -->
+            <div id="dashboard-favorites-grid" class="tools-grid hidden"></div>
+
+            <!-- Empty Favorites State -->
+            <div id="dashboard-favorites-empty" class="empty-state">
+              <svg class="icon empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+              <p>No favourite tools pinned yet. Click the <strong>star icon</strong> on any tool card to keep it handy right here.</p>
+            </div>
+          </div>
+
+          <!-- Section: Recently Used Tools -->
+          <div class="section-recents-wrapper">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <svg class="icon" style="color: #38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <h2 class="section-title">Recently Used</h2>
+              </div>
+              <div class="section-actions">
+                <button id="btn-clear-recents" type="button" class="btn btn-xs btn-outline hidden">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  Clear History
+                </button>
+              </div>
+            </div>
+
+            <!-- Recents Grid Container -->
+            <div id="dashboard-recents-grid" class="tools-grid hidden"></div>
+
+            <!-- Empty Recents State -->
+            <div id="dashboard-recents-empty" class="empty-state">
+              <svg class="icon empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <p>No recently used tools recorded yet. Select any tool to get started.</p>
+            </div>
+          </div>
+
+          <!-- Section: All Tools Catalog -->
+          <div class="section-all-tools-wrapper">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <svg class="icon" style="color: var(--accent-purple);" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                <h2 class="section-title">All Developer Tools</h2>
+              </div>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="category-filter-pills" role="tablist" aria-label="Tool category filters">
+              <button type="button" class="category-filter-btn active" data-cat="all">All Tools</button>
+              <button type="button" class="category-filter-btn" data-cat="json">JSON Tools</button>
+              <button type="button" class="category-filter-btn" data-cat="encoding">Encoding Tools</button>
+              <button type="button" class="category-filter-btn" data-cat="text">Text Tools</button>
+              <button type="button" class="category-filter-btn" data-cat="generator">Generators</button>
+            </div>
+
+            <!-- All Tools Grid Container -->
+            <div id="dashboard-all-tools-grid" class="tools-grid"></div>
+
+            <!-- Empty Search State -->
+            <div id="dashboard-search-empty" class="empty-state hidden">
+              <svg class="icon empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <p>No tools found matching <strong class="search-query-text">""</strong>. Try searching with a different term.</p>
+              <button id="btn-clear-search" type="button" class="btn btn-sm btn-secondary" style="margin-top: 1rem;">Clear Search</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 2: JSON FORMATTER -->
+        <!-- ================================================================== -->
+        <section id="tool-json-formatter" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-json">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">JSON Formatter</h1>
+                    <span class="badge-count">JSON Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Format, prettify, or compact JSON data with configurable indentation and instant size metrics.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="json-fmt-btn" class="btn btn-primary">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.286L13 21l-2.286-6.857L5 12l5.714-2.286L13 3z"/></svg>
+                  Format JSON
+                </button>
+                <button type="button" id="json-fmt-minify-btn" class="btn btn-secondary">Minify / Compact</button>
+
+                <label for="json-fmt-indent" style="font-size: 0.82rem; color: var(--text-secondary); margin-left: 0.5rem;">Indent:</label>
+                <select id="json-fmt-indent" class="select-control">
+                  <option value="2">2 Spaces</option>
+                  <option value="4">4 Spaces</option>
+                  <option value="tab">Tabs</option>
+                </select>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="json-fmt-sample-btn" class="btn btn-outline btn-sm">Load Sample</button>
+                <button type="button" id="json-fmt-clear-btn" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="json-fmt-copy-btn" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Output
+                </button>
+              </div>
+            </div>
+
+            <!-- Error Box -->
+            <div id="json-fmt-error" class="error-box hidden"></div>
+
+            <!-- Two-column Editors -->
+            <div class="tool-panes-grid">
+              <!-- Input Pane -->
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Input JSON</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="json-fmt-input" class="pane-textarea" placeholder="Paste unformatted or raw JSON here..." spellcheck="false"></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Enter raw JSON or click Load Sample</span>
+                </div>
+              </div>
+
+              <!-- Output Pane -->
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Formatted Output</span>
+                  <span id="json-fmt-stats" class="badge-count">Ready</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="json-fmt-output" class="pane-textarea" placeholder="Formatted result will appear here..." readonly spellcheck="false"></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Click Copy Output to copy formatted JSON</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 3: JSON VALIDATOR -->
+        <!-- ================================================================== -->
+        <section id="tool-json-validator" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-json">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">JSON Validator</h1>
+                    <span class="badge-count">JSON Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Deep JSON syntax verification with precise line and column error pointers and structural analysis.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="json-val-btn" class="btn btn-primary">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  Validate JSON
+                </button>
+                <button type="button" id="json-val-sample-valid" class="btn btn-secondary">Load Valid Sample</button>
+                <button type="button" id="json-val-sample-invalid" class="btn btn-secondary">Load Broken Sample</button>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="json-val-clear-btn" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="json-val-copy-btn" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Input
+                </button>
+              </div>
+            </div>
+
+            <!-- Input Pane -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">JSON Source Code</span>
+              </div>
+              <div class="pane-editor-wrapper">
+                <textarea id="json-val-input" class="pane-textarea" placeholder="Paste JSON here to check for syntax errors..." spellcheck="false" style="min-height: 220px;"></textarea>
+              </div>
+            </div>
+
+            <!-- Validation Result Panel -->
+            <div id="json-val-result" class="val-result-box empty">
+              <div class="empty-state">
+                <svg class="icon empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+                <p>Paste or type your JSON above and click <strong>Validate JSON</strong> to inspect syntax.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 4: BASE64 ENCODER -->
+        <!-- ================================================================== -->
+        <section id="tool-b64-encoder" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-encoding">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">Base64 Encoder</h1>
+                    <span class="badge-count">Encoding Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Encode UTF-8 plain text, unicode strings, and emojis into standard or URL-safe Base64.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="b64-enc-btn" class="btn btn-primary">Encode to Base64</button>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="b64-enc-url-safe">
+                  URL-Safe (- and _ without padding)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="b64-enc-live" checked>
+                  Live Encoding
+                </label>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="b64-enc-sample" class="btn btn-outline btn-sm">Load Sample</button>
+                <button type="button" id="b64-enc-clear" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="b64-enc-copy" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Base64
+                </button>
+              </div>
+            </div>
+
+            <!-- Two-column Editors -->
+            <div class="tool-panes-grid">
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Plain Text Input (UTF-8)</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="b64-enc-input" class="pane-textarea" placeholder="Type or paste plain text here..."></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Supports international characters and emojis</span>
+                </div>
+              </div>
+
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Base64 Encoded Output</span>
+                  <span id="b64-enc-stats" class="badge-count">Ready</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="b64-enc-output" class="pane-textarea" placeholder="Encoded Base64 result will appear here..." readonly></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Ready for HTTP headers, cookies, or data URLs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 5: BASE64 DECODER -->
+        <!-- ================================================================== -->
+        <section id="tool-b64-decoder" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-encoding">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">Base64 Decoder</h1>
+                    <span class="badge-count">Encoding Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Decode Base64 strings back to clean UTF-8 text with automatic URL-safe padding handling.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="b64-dec-btn" class="btn btn-primary">Decode Base64</button>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="b64-dec-live" checked>
+                  Live Decoding
+                </label>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="b64-dec-sample" class="btn btn-outline btn-sm">Load Sample</button>
+                <button type="button" id="b64-dec-clear" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="b64-dec-copy" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Text
+                </button>
+              </div>
+            </div>
+
+            <!-- Error Box -->
+            <div id="b64-dec-error" class="error-box hidden"></div>
+
+            <!-- Two-column Editors -->
+            <div class="tool-panes-grid">
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Base64 Input</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="b64-dec-input" class="pane-textarea" placeholder="Paste Base64 encoded string here..."></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Supports standard and URL-safe Base64</span>
+                </div>
+              </div>
+
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Decoded Plain Text</span>
+                  <span id="b64-dec-stats" class="badge-count">Ready</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="b64-dec-output" class="pane-textarea" placeholder="Decoded output will appear here..." readonly></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Decoded UTF-8 plain text</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 6: URL ENCODER -->
+        <!-- ================================================================== -->
+        <section id="tool-url-encoder" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-encoding">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">URL Encoder</h1>
+                    <span class="badge-count">Encoding Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Safely percent-encode URLs and URI components for query parameters and API endpoints.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="url-enc-btn" class="btn btn-primary">Encode URL</button>
+
+                <label for="url-enc-mode" style="font-size: 0.82rem; color: var(--text-secondary); margin-left: 0.5rem;">Mode:</label>
+                <select id="url-enc-mode" class="select-control">
+                  <option value="component">Component (encodeURIComponent)</option>
+                  <option value="full">Full URL (encodeURI)</option>
+                </select>
+
+                <label class="checkbox-label">
+                  <input type="checkbox" id="url-enc-space-plus">
+                  Space as '+'
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="url-enc-live" checked>
+                  Live Encoding
+                </label>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="url-enc-sample" class="btn btn-outline btn-sm">Load Sample</button>
+                <button type="button" id="url-enc-clear" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="url-enc-copy" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Encoded
+                </button>
+              </div>
+            </div>
+
+            <!-- Two-column Editors -->
+            <div class="tool-panes-grid">
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Raw URL / Text Input</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="url-enc-input" class="pane-textarea" placeholder="Paste raw URL or query parameter value here..."></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Enter unencoded characters</span>
+                </div>
+              </div>
+
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Percent-Encoded Output</span>
+                  <span id="url-enc-stats" class="badge-count">Ready</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="url-enc-output" class="pane-textarea" placeholder="Percent-encoded URL will appear here..." readonly></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Safe for URI query parameters</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 7: URL DECODER -->
+        <!-- ================================================================== -->
+        <section id="tool-url-decoder" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-encoding">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">URL Decoder</h1>
+                    <span class="badge-count">Encoding Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Convert percent-encoded URL query strings and characters back to human-readable text.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="url-dec-btn" class="btn btn-primary">Decode URL</button>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="url-dec-plus-space" checked>
+                  Treat '+' as space
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="url-dec-live" checked>
+                  Live Decoding
+                </label>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="url-dec-sample" class="btn btn-outline btn-sm">Load Sample</button>
+                <button type="button" id="url-dec-clear" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="url-dec-copy" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Decoded
+                </button>
+              </div>
+            </div>
+
+            <!-- Error Box -->
+            <div id="url-dec-error" class="error-box hidden"></div>
+
+            <!-- Two-column Editors -->
+            <div class="tool-panes-grid">
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Encoded URL Input</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="url-dec-input" class="pane-textarea" placeholder="Paste encoded URL string (e.g. %20, %2F)..."></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Handles standard URI percent sequences</span>
+                </div>
+              </div>
+
+              <div class="pane-card glass-panel">
+                <div class="pane-header">
+                  <span class="pane-title">Decoded Plain Text</span>
+                  <span id="url-dec-stats" class="badge-count">Ready</span>
+                </div>
+                <div class="pane-editor-wrapper">
+                  <textarea id="url-dec-output" class="pane-textarea" placeholder="Decoded text will appear here..." readonly></textarea>
+                </div>
+                <div class="pane-footer">
+                  <span>Human-readable URL parameters</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 8: CASE CONVERTER -->
+        <!-- ================================================================== -->
+        <section id="tool-case-converter" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-text">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">Case Converter</h1>
+                    <span class="badge-count">Text Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, and more.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar (Case Triggers) -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="upper">UPPERCASE</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="lower">lowercase</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="title">Title Case</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="sentence">Sentence Case</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="camel">camelCase</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="pascal">PascalCase</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="snake">snake_case</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-case-action="kebab">kebab-case</button>
+              </div>
+
+              <div class="toolbar-right">
+                <button type="button" id="case-sample-btn" class="btn btn-outline btn-sm">Load Sample</button>
+                <button type="button" id="case-clear-btn" class="btn btn-outline btn-sm">Clear</button>
+                <button type="button" id="case-copy-btn" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Text
+                </button>
+              </div>
+            </div>
+
+            <!-- Input Textarea -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Input Text</span>
+                <span id="case-stats" class="badge-count">0 characters | 0 words</span>
+              </div>
+              <div class="pane-editor-wrapper">
+                <textarea id="case-input" class="pane-textarea" placeholder="Type or paste text here to see live transformations across all cases..." style="min-height: 160px;"></textarea>
+              </div>
+            </div>
+
+            <!-- Live Previews Grid for all formats -->
+            <div class="section-header" style="margin-top: 1rem;">
+              <h2 class="section-title">All Converted Variations</h2>
+            </div>
+            <div id="case-previews-list" class="case-previews-grid">
+              <!-- Rendered dynamically by text-tools.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 9: WORD COUNTER -->
+        <!-- ================================================================== -->
+        <section id="tool-word-counter" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-text">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">Word Counter</h1>
+                    <span class="badge-count">Text Tools</span>
+                  </div>
+                  <p class="tool-header-desc">In-depth text metrics: word count, characters, sentences, paragraphs, reading speed, and keyword density.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="tool-action-toolbar glass-panel">
+              <div class="toolbar-left">
+                <button type="button" id="wc-sample-btn" class="btn btn-secondary">Load Sample Text</button>
+              </div>
+              <div class="toolbar-right">
+                <button type="button" id="wc-clear-btn" class="btn btn-outline btn-sm">Clear Text</button>
+                <button type="button" id="wc-copy-btn" class="btn btn-outline btn-sm">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy Text
+                </button>
+              </div>
+            </div>
+
+            <!-- Real-time Metrics Dashboard Grid -->
+            <div class="wc-metrics-grid">
+              <div class="wc-metric-card">
+                <div id="wc-stat-words" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Words</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-chars" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Chars (with spaces)</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-chars-no-spaces" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Chars (no spaces)</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-sentences" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Sentences</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-paragraphs" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Paragraphs</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-lines" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Lines</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-reading-time" class="wc-metric-val">0 sec</div>
+                <div class="wc-metric-title">Reading Time</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-speaking-time" class="wc-metric-val">0 sec</div>
+                <div class="wc-metric-title">Speaking Time</div>
+              </div>
+              <div class="wc-metric-card">
+                <div id="wc-stat-avg-word-len" class="wc-metric-val">0</div>
+                <div class="wc-metric-title">Avg Word Len</div>
+              </div>
+            </div>
+
+            <!-- Text Input Area -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Text Content</span>
+              </div>
+              <div class="pane-editor-wrapper">
+                <textarea id="wc-input" class="pane-textarea" placeholder="Start typing or paste your content here to inspect real-time statistics..." style="min-height: 240px;"></textarea>
+              </div>
+            </div>
+
+            <!-- Top Keyword Density List -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Top Keyword Density (Excluding Stop Words)</span>
+              </div>
+              <div id="wc-keyword-density">
+                <div class="empty-keywords">Type or paste text above to view keyword distribution</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 10: PASSWORD GENERATOR -->
+        <!-- ================================================================== -->
+        <section id="tool-password-generator" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-generator">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">Password Generator</h1>
+                    <span class="badge-count">Generator Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Generate cryptographically secure passwords using Web Crypto API (crypto.getRandomValues).</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Display & Strength Card -->
+            <div class="pwd-display-card glass-panel">
+              <div class="pwd-output-wrapper">
+                <input type="text" id="pwd-output" class="pwd-input-field" readonly spellcheck="false" aria-label="Generated password">
+                <button type="button" id="pwd-copy-btn" class="btn btn-primary pwd-copy-btn">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy
+                </button>
+              </div>
+
+              <!-- Strength Progress Meter -->
+              <div class="pwd-strength-container">
+                <div class="pwd-strength-meta">
+                  <span>Strength: <strong id="pwd-strength-label">Strong</strong></span>
+                  <span id="pwd-entropy-badge" class="badge-count">0 bits entropy</span>
+                  <span id="pwd-strength-crack" style="color: var(--text-muted);">Est. crack time: Centuries</span>
+                </div>
+                <div class="pwd-meter-bg">
+                  <div id="pwd-strength-bar" class="pwd-meter-fill"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Generator Options Toolbar -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Configuration &amp; Character Options</span>
+              </div>
+
+              <div class="pwd-slider-wrapper">
+                <div class="pwd-slider-header">
+                  <span>Password Length:</span>
+                  <strong id="pwd-length-val" style="color: var(--accent-purple); font-size: 1.1rem;">16</strong>
+                </div>
+                <input type="range" id="pwd-length" class="pwd-slider" min="6" max="64" value="16">
+              </div>
+
+              <div class="pwd-controls-grid" style="margin-top: 1rem;">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="pwd-opt-upper" checked>
+                  Uppercase Letters (A-Z)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="pwd-opt-lower" checked>
+                  Lowercase Letters (a-z)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="pwd-opt-numbers" checked>
+                  Numbers (0-9)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="pwd-opt-symbols" checked>
+                  Symbols (!@#$%^&amp;*...)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="pwd-opt-ambiguous">
+                  Exclude Ambiguous (0, O, l, 1, I)
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="pwd-opt-brackets">
+                  Exclude Brackets ({}, [], &lt;&gt;)
+                </label>
+              </div>
+
+              <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+                <button type="button" id="pwd-generate-btn" class="btn btn-primary">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  Generate New Password
+                </button>
+              </div>
+            </div>
+
+            <!-- Bulk Password Generator Card -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Bulk Password Generator</span>
+                <div class="pane-actions">
+                  <label for="pwd-bulk-count" style="font-size: 0.82rem; color: var(--text-secondary);">Count:</label>
+                  <select id="pwd-bulk-count" class="select-control">
+                    <option value="5">5 Passwords</option>
+                    <option value="10">10 Passwords</option>
+                    <option value="20">20 Passwords</option>
+                  </select>
+                  <button type="button" id="pwd-bulk-generate-btn" class="btn btn-secondary btn-sm">Generate Bulk</button>
+                  <button type="button" id="pwd-bulk-copy-all" class="btn btn-outline btn-sm">Copy All</button>
+                </div>
+              </div>
+              <div id="pwd-bulk-list" class="pwd-bulk-list">
+                <div class="empty-state" style="padding: 1.5rem;">
+                  <p>Click <strong>Generate Bulk</strong> to create a batch of secure passwords simultaneously.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- VIEW 11: COLOR CONVERTER -->
+        <!-- ================================================================== -->
+        <section id="tool-color-converter" class="view-section">
+          <div class="tool-view-container">
+            <div class="tool-header-panel glass-panel">
+              <div class="tool-header-info">
+                <a href="#dashboard" class="btn btn-sm btn-outline" title="Back to Dashboard">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                  Back
+                </a>
+                <div class="tool-header-icon-wrap cat-generator">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4 8 8 0 0116 0 4 4 0 01-4 4 4 4 0 01-4-4 2 2 0 00-4 0 4 4 0 01-4 4z"/></svg>
+                </div>
+                <div class="tool-header-titles">
+                  <div class="tool-header-title-row">
+                    <h1 class="tool-header-title">Color Converter</h1>
+                    <span class="badge-count">Generator Tools</span>
+                  </div>
+                  <p class="tool-header-desc">Convert HEX, RGB, HSL, and CMYK formats with WCAG contrast ratio scoring and color harmonies.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Color Swatch & Live Preview -->
+            <div class="color-preview-card glass-panel">
+              <div id="color-swatch-preview" class="color-swatch-box" style="background-color: #6366F1;">
+                <input type="color" id="color-picker-input" class="color-picker-native" value="#6366f1" aria-label="Color Picker">
+                <div class="color-picker-badge">Click swatch to pick color</div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <button type="button" id="color-random-btn" class="btn btn-secondary">
+                  <svg class="icon btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  Random Color
+                </button>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">All formats synchronize automatically</span>
+              </div>
+            </div>
+
+            <!-- Interactive Synchronized Inputs -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Synchronized Color Inputs</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div>
+                  <label for="color-input-hex" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">HEX CODE</label>
+                  <input type="text" id="color-input-hex" class="pane-textarea" style="min-height: 44px; padding: 0.5rem 0.75rem; margin-top: 0.25rem;" value="#6366F1">
+                </div>
+                <div>
+                  <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">RGB (R / G / B)</label>
+                  <div style="display: flex; gap: 0.35rem; margin-top: 0.25rem;">
+                    <input type="number" id="color-input-r" min="0" max="255" class="pane-textarea" style="min-height: 44px; padding: 0.5rem;" value="99" title="Red">
+                    <input type="number" id="color-input-g" min="0" max="255" class="pane-textarea" style="min-height: 44px; padding: 0.5rem;" value="102" title="Green">
+                    <input type="number" id="color-input-b" min="0" max="255" class="pane-textarea" style="min-height: 44px; padding: 0.5rem;" value="241" title="Blue">
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">HSL (H / S% / L%)</label>
+                  <div style="display: flex; gap: 0.35rem; margin-top: 0.25rem;">
+                    <input type="number" id="color-input-h" min="0" max="360" class="pane-textarea" style="min-height: 44px; padding: 0.5rem;" value="239" title="Hue">
+                    <input type="number" id="color-input-s" min="0" max="100" class="pane-textarea" style="min-height: 44px; padding: 0.5rem;" value="84" title="Saturation">
+                    <input type="number" id="color-input-l" min="0" max="100" class="pane-textarea" style="min-height: 44px; padding: 0.5rem;" value="67" title="Lightness">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Output Formats Grid with Copy Buttons -->
+            <div class="color-values-grid">
+              <div class="color-val-card">
+                <div class="color-val-meta">
+                  <span class="color-val-label">HEX</span>
+                  <span id="color-str-hex" class="color-val-text">#6366F1</span>
+                </div>
+                <button type="button" class="btn btn-xs btn-outline btn-color-copy" data-target="#color-str-hex">Copy</button>
+              </div>
+
+              <div class="color-val-card">
+                <div class="color-val-meta">
+                  <span class="color-val-label">RGB</span>
+                  <span id="color-str-rgb" class="color-val-text">rgb(99, 102, 241)</span>
+                </div>
+                <button type="button" class="btn btn-xs btn-outline btn-color-copy" data-target="#color-str-rgb">Copy</button>
+              </div>
+
+              <div class="color-val-card">
+                <div class="color-val-meta">
+                  <span class="color-val-label">HSL</span>
+                  <span id="color-str-hsl" class="color-val-text">hsl(239, 84%, 67%)</span>
+                </div>
+                <button type="button" class="btn btn-xs btn-outline btn-color-copy" data-target="#color-str-hsl">Copy</button>
+              </div>
+
+              <div class="color-val-card">
+                <div class="color-val-meta">
+                  <span class="color-val-label">CMYK</span>
+                  <span id="color-str-cmyk" class="color-val-text">cmyk(59%, 58%, 0%, 5%)</span>
+                </div>
+                <button type="button" class="btn btn-xs btn-outline btn-color-copy" data-target="#color-str-cmyk">Copy</button>
+              </div>
+            </div>
+
+            <!-- WCAG Contrast Ratio Checker -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">WCAG 2.1 Accessibility &amp; Contrast Ratio</span>
+              </div>
+              <div class="color-contrast-row">
+                <div class="contrast-box">
+                  <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.35rem;">Contrast with White (#FFFFFF)</div>
+                  <div id="color-contrast-white">
+                    <div class="contrast-score">4.85:1</div>
+                    <div class="contrast-badge badge-pass">PASS (AA)</div>
+                  </div>
+                </div>
+                <div class="contrast-box">
+                  <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.35rem;">Contrast with Black (#000000)</div>
+                  <div id="color-contrast-black">
+                    <div class="contrast-score">4.33:1</div>
+                    <div class="contrast-badge badge-fail">FAIL</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Harmonic Palettes -->
+            <div class="pane-card glass-panel">
+              <div class="pane-header">
+                <span class="pane-title">Harmonies &amp; Complementary Palette</span>
+              </div>
+              <div id="color-harmonies-list" class="color-harmonies-grid">
+                <!-- Rendered dynamically by color-tool.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript Modules in Dependency Order -->
+  <script src="./js/utils.js"></script>
+  <script src="./js/tools/json-tools.js"></script>
+  <script src="./js/tools/encoding-tools.js"></script>
+  <script src="./js/tools/text-tools.js"></script>
+  <script src="./js/tools/password-tool.js"></script>
+  <script src="./js/tools/color-tool.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
